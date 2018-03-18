@@ -18,7 +18,9 @@ CHIP Mux8Way16 {
     OUT out[16];
 
     PARTS:
+    // まず、selの下2桁でa..d, e..hのどれが候補になるか分類する
     Mux4Way16(a=a, b=b, c=c, d=d, sel=sel[0..1], out=w1);
     Mux4Way16(a=e, b=f, c=g, d=h, sel=sel[0..1], out=w2);
+    // 最終桁で、前半と後半のどちらが最終出力になるかを分類する
     Mux16(a=w1, b=w2, sel=sel[2], out=out);
 }
